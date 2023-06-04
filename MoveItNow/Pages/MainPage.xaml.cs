@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using MoveItNow.ViewModels;
+using System.Windows.Controls;
 
 namespace MoveItNow
 {
@@ -10,6 +11,7 @@ namespace MoveItNow
         public MainPage()
         {
             InitializeComponent();
+            DataContext = new MainViewModel();
         }
     }
 }
