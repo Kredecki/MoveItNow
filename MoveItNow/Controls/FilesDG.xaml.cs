@@ -26,5 +26,15 @@ namespace MoveItNow
         {
             InitializeComponent();
         }
+
+        private void DataGrid_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            var newWidth = e.NewSize.Width / 4;
+
+            NameColumn.Width = newWidth;
+            ExtensionColumn.Width = newWidth;
+            SizeColumn.Width = newWidth;
+            LastModifiedColumn.Width = newWidth;
+        }
     }
 }
