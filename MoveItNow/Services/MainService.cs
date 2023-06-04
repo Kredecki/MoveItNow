@@ -35,6 +35,19 @@ namespace MoveItNow.Services
                     };
                     files.Add(fileInformation);
                 }
+                var directoryDirectories = Directory.GetDirectories(path);
+                foreach (var directoryPath in directoryDirectories)
+                {
+                    var directoryInfo = new DirectoryInfo(directoryPath);
+                    var directoryInformation = new FilesModel
+                    {
+                        Name = directoryInfo.Name,
+                        Extension = directoryInfo.Extension,
+                        Size = directoryInfo.EnumerateFiles("*", SearchOption.AllDirectories).Sum(file => file.Length),
+                        LastModified = directoryInfo.LastWriteTime
+                    };
+                    files.Add(directoryInformation);
+                }
             }
         }
     }
