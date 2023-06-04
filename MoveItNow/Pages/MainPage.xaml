@@ -3,7 +3,8 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:MoveItNow" xmlns:viewmodels="clr-namespace:MoveItNow.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
+      xmlns:local="clr-namespace:MoveItNow" 
+      xmlns:viewmodels="clr-namespace:MoveItNow.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="800"
       Title="MainPage">
@@ -16,14 +17,14 @@
             HorizontalAlignment="Left"
             Height="20"  
             Width="380" />
-        <local:FilesLB 
+        <local:FilesDG 
             Files="{Binding SourceFiles}" 
             Margin="10,40,0,0"
             VerticalAlignment="Top" 
             HorizontalAlignment="Left" 
             Height="500" 
             Width="380" />
-        
+
         <local:BrowseTB 
             FilePath="{Binding DestinationPath, Mode=TwoWay}"
             Margin="390,10,0,0"
@@ -31,7 +32,7 @@
             HorizontalAlignment="Left" 
             Height="20"  
             Width="380" />
-        <local:FilesLB 
+        <local:FilesDG 
             Files="{Binding DestinationFiles}" 
             Margin="390,40,0,0" 
             VerticalAlignment="Top"

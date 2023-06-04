@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MoveItNow.Models;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -10,21 +11,29 @@ namespace MoveItNow.Services
 {
     public interface IMainService
     {
-        void UpdateFiles(string path, ObservableCollection<string> files);
+        void UpdateFiles(string path, ObservableCollection<FilesModel> files);
     }
 
     public class MainService : IMainService
     {
-        public void UpdateFiles(string path, ObservableCollection<string> files)
+        public void UpdateFiles(string path, ObservableCollection<FilesModel> files)
         {
             files.Clear();
 
             if (Directory.Exists(path))
             {
                 var directoryFiles = Directory.GetFiles(path);
-                foreach (var file in directoryFiles)
+                foreach (var filePath in directoryFiles)
                 {
-                    files.Add(file);
+                    var fileInfo = new FileInfo(filePath);
+                    var fileInformation = new FilesModel
+                    {
+                        Name = fileInfo.Name,
+                        Extension = fileInfo.Extension,
+                        Size = fileInfo.Length,
+                        LastModified = fileInfo.LastWriteTime
+                    };
+                    files.Add(fileInformation);
                 }
             }
         }

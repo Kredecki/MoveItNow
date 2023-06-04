@@ -24,7 +24,7 @@ namespace MoveItNow.ViewModels
                 }
             }
         }
-        public ObservableCollection<string> SourceFiles { get; } = new ObservableCollection<string>();
+        public ObservableCollection<FilesModel> SourceFiles { get; } = new ObservableCollection<FilesModel>();
 
         public string DestinationPath
         {
@@ -39,7 +39,7 @@ namespace MoveItNow.ViewModels
                 }
             }
         }
-        public ObservableCollection<string> DestinationFiles { get; } = new ObservableCollection<string>();
+        public ObservableCollection<FilesModel> DestinationFiles { get; } = new ObservableCollection<FilesModel>();
         
         public event PropertyChangedEventHandler PropertyChanged;
 
