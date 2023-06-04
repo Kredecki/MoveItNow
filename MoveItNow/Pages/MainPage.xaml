@@ -10,16 +10,24 @@
 
     <Grid>
         <local:BrowseTB
+            FilePath="{Binding SourcePath, Mode=TwoWay}"
             Margin="10,10,0,0" 
             VerticalAlignment="Top" 
             HorizontalAlignment="Left"
             Height="20"  
             Width="380" />
         <local:BrowseTB 
+            FilePath="{Binding DestinationPath, Mode=TwoWay}"
             Margin="390,10,0,0"
             VerticalAlignment="Top"
             HorizontalAlignment="Left" 
             Height="20"  
             Width="380" />
+        <ListBox
+            ItemsSource="{Binding SourceFiles}"
+            Margin="10,40,0,0" Height="500" VerticalAlignment="Top" HorizontalAlignment="Left" Width="380" />
+        <ListBox
+            ItemsSource="{Binding DestinationFiles}"
+            Margin="390,40,0,0" HorizontalAlignment="Left" Width="380" Height="500" VerticalAlignment="Top" />
     </Grid>
 </Page>

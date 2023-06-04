@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 
 namespace MoveItNow.Models
 {
     public class FilesModel
     {
-        public string FileName { get; set; }
-        public string FilePath { get; set; }
-        public string FileSize { get; set; }
+        public string SourcePath { get; set; }
+        public string DestinationPath { get; set; }
+        public ObservableCollection<string> SourceFiles { get; set; } = new ObservableCollection<string>();
+        public ObservableCollection<string> DestinationFiles { get; set; } = new ObservableCollection<string>();
     }
 }

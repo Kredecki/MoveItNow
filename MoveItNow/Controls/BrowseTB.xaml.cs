@@ -1,9 +1,5 @@
-﻿using MoveItNow.ViewModels;
-using System.Windows;
-using System.Windows.Controls;
-using Microsoft.Win32;
+﻿using System.Windows;
 using Microsoft.WindowsAPICodePack.Dialogs;
-
 
 namespace MoveItNow
 {
@@ -12,12 +8,21 @@ namespace MoveItNow
     /// </summary>
     public partial class BrowseTB : System.Windows.Controls.UserControl
     {
-        public readonly MainViewModel viewModel = new();
-        
+        public static readonly DependencyProperty FilePathProperty = DependencyProperty.Register(
+            "FilePath",
+            typeof(string),
+            typeof(BrowseTB),
+            new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
+        public string FilePath
+        {
+            get => (string)GetValue(FilePathProperty);
+            set => SetValue(FilePathProperty, value);
+        }
+
         public BrowseTB()
         {
             InitializeComponent();
-            DataContext = viewModel;
         }
 
         public void GetPath(object sender, RoutedEventArgs e)
@@ -27,7 +32,7 @@ namespace MoveItNow
 
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
-                viewModel.FilePath = dialog.FileName;
+                FilePath = dialog.FileName;
             }
         }
     }
