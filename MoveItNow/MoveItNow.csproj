@@ -12,7 +12,6 @@
     <Folder Include="Converters\" />
     <Folder Include="Commands\" />
     <Folder Include="Resources\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
   <ItemGroup>

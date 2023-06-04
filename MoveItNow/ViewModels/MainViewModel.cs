@@ -1,4 +1,5 @@
 ﻿using MoveItNow.Models;
+using MoveItNow.Services;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
@@ -8,6 +9,7 @@ namespace MoveItNow.ViewModels
     public class MainViewModel : INotifyPropertyChanged
     {
         private readonly FilesModel model = new();
+        private readonly MainService _mainService = new();
 
         public string SourcePath
         {
@@ -18,7 +20,7 @@ namespace MoveItNow.ViewModels
                 {
                     model.SourcePath = value;
                     OnPropertyChanged(nameof(SourcePath));
-                    UpdateFiles(value, SourceFiles);
+                    _mainService.UpdateFiles(value, SourceFiles);
                 }
             }
         }
@@ -33,26 +35,12 @@ namespace MoveItNow.ViewModels
                 {
                     model.DestinationPath = value;
                     OnPropertyChanged(nameof(DestinationPath));
-                    UpdateFiles(value, DestinationFiles);
+                    _mainService.UpdateFiles(value, DestinationFiles);
                 }
             }
         }
         public ObservableCollection<string> DestinationFiles { get; } = new ObservableCollection<string>();
-
-        private void UpdateFiles(string path, ObservableCollection<string> files)
-        {
-            files.Clear();
-
-            if (Directory.Exists(path))
-            {
-                var directoryFiles = Directory.GetFiles(path);
-                foreach (var file in directoryFiles)
-                {
-                    files.Add(file);
-                }
-            }
-        }
-
+        
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)
