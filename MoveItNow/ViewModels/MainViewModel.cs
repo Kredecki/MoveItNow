@@ -9,15 +9,15 @@ namespace MoveItNow.ViewModels
 {
     public class MainViewModel
     {
-        private readonly IMainService _mainService;
+        private readonly IBrowseService _browseService;
         public Browse SourceBrowse { get; }
         public Browse DestinationBrowse { get; }
 
-        public MainViewModel(IMainService mainService)
+        public MainViewModel(IBrowseService mainService)
         {
-            _mainService = mainService;
-            SourceBrowse = new Browse(_mainService);
-            DestinationBrowse = new Browse(_mainService);
+            _browseService = mainService;
+            SourceBrowse = new Browse(_browseService);
+            DestinationBrowse = new Browse(_browseService);
         }
     }
 
@@ -25,10 +25,10 @@ namespace MoveItNow.ViewModels
     {
         private readonly FilesModel model = new();
 
-        private readonly IMainService _mainService;
-        public Browse(IMainService mainService)
+        private readonly IBrowseService _browseService;
+        public Browse(IBrowseService mainService)
         {
-            _mainService = mainService;
+            _browseService = mainService;
         }
 
         public string Path
@@ -40,7 +40,7 @@ namespace MoveItNow.ViewModels
                 {
                     model.Path = value;
                     OnPropertyChanged(nameof(Path));
-                    _mainService.UpdateFiles(value, Files);
+                    _browseService.UpdateFiles(value, Files);
                 }
             }
         }

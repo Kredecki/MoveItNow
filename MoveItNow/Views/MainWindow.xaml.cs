@@ -12,7 +12,7 @@ namespace MoveItNow
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainViewModel(new MainService());
+            DataContext = new MainViewModel(new BrowseService());
         }
     }
 }

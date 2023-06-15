@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace MoveItNow.Services
 {
-    public interface IMainService
+    public interface IBrowseService
     {
         void UpdateFiles(string path, ObservableCollection<FilesModel> files);
     }
 
-    public class MainService : IMainService
+    public class BrowseService : IBrowseService
     {
         public void UpdateFiles(string path, ObservableCollection<FilesModel> files)
         {
