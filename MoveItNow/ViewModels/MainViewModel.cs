@@ -40,7 +40,9 @@ namespace MoveItNow.ViewModels
                 {
                     model.Path = value;
                     OnPropertyChanged(nameof(Path));
-                    _browseService.UpdateFiles(value, Files);
+                    Files.Clear();
+                    _browseService.BrowseDirectories(value, Files);
+                    _browseService.BrowseFiles(value, Files);
                 }
             }
         }

@@ -11,15 +11,14 @@ namespace MoveItNow.Services
 {
     public interface IBrowseService
     {
-        void UpdateFiles(string path, ObservableCollection<FilesModel> files);
+        void BrowseFiles(string path, ObservableCollection<FilesModel> files);
+        void BrowseDirectories(string path, ObservableCollection<FilesModel> files);
     }
 
     public class BrowseService : IBrowseService
     {
-        public void UpdateFiles(string path, ObservableCollection<FilesModel> files)
+        public void BrowseFiles(string path, ObservableCollection<FilesModel> files)
         {
-            files.Clear();
-
             if (Directory.Exists(path))
             {
                 var directoryFiles = Directory.GetFiles(path);
@@ -35,19 +34,23 @@ namespace MoveItNow.Services
                     };
                     files.Add(fileInformation);
                 }
-                var directoryDirectories = Directory.GetDirectories(path);
-                foreach (var directoryPath in directoryDirectories)
+            }
+        }
+
+        public void BrowseDirectories(string path, ObservableCollection<FilesModel> files)
+        {
+            var directoryDirectories = Directory.GetDirectories(path);
+            foreach (var directoryPath in directoryDirectories)
+            {
+                var directoryInfo = new DirectoryInfo(directoryPath);
+                var directoryInformation = new FilesModel
                 {
-                    var directoryInfo = new DirectoryInfo(directoryPath);
-                    var directoryInformation = new FilesModel
-                    {
-                        Name = directoryInfo.Name,
-                        Extension = directoryInfo.Extension,
-                        Size = directoryInfo.EnumerateFiles("*", SearchOption.AllDirectories).Sum(file => file.Length),
-                        LastModified = directoryInfo.LastWriteTime
-                    };
-                    files.Add(directoryInformation);
-                }
+                    Name = directoryInfo.Name,
+                    Extension = directoryInfo.Extension,
+                    Size = directoryInfo.EnumerateFiles("*", SearchOption.AllDirectories).Sum(file => file.Length),
+                    LastModified = directoryInfo.LastWriteTime
+                };
+                files.Add(directoryInformation);
             }
         }
     }
