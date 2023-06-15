@@ -21,7 +21,7 @@ namespace MoveItNow.ViewModels
         }
     }
 
-    public class Browse : INotifyPropertyChanged
+    public class Browse : ObservableObject
     {
         private readonly FilesModel model = new();
 
@@ -48,7 +48,10 @@ namespace MoveItNow.ViewModels
         }
 
         public ObservableCollection<FilesModel> Files { get; } = new ObservableCollection<FilesModel>();
+    }
 
+    public class ObservableObject : INotifyPropertyChanged
+    {
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)
