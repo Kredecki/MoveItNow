@@ -10,9 +10,6 @@ namespace MoveItNow.Models
         public string Extension { get; set; }
         public long Size { get; set; }
         public DateTime LastModified { get; set; }
-        public string SourcePath { get; set; }
-        public string DestinationPath { get; set; }
-        public ObservableCollection<FilesModel> SourceFiles { get; set; } = new ObservableCollection<FilesModel>();
-        public ObservableCollection<FilesModel> DestinationFiles { get; set; } = new ObservableCollection<FilesModel>();
+        public string Path { get; set; }
     }
 }

@@ -2,45 +2,51 @@
 using MoveItNow.Services;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 
 namespace MoveItNow.ViewModels
 {
-    public class MainViewModel : INotifyPropertyChanged
+    public class MainViewModel
+    {
+        private readonly IMainService _mainService;
+        public Browse SourceBrowse { get; }
+        public Browse DestinationBrowse { get; }
+
+        public MainViewModel(IMainService mainService)
+        {
+            _mainService = mainService;
+            SourceBrowse = new Browse(_mainService);
+            DestinationBrowse = new Browse(_mainService);
+        }
+    }
+
+    public class Browse : INotifyPropertyChanged
     {
         private readonly FilesModel model = new();
-        private readonly MainService _mainService = new();
 
-        public string SourcePath
+        private readonly IMainService _mainService;
+        public Browse(IMainService mainService)
         {
-            get { return model.SourcePath; }
+            _mainService = mainService;
+        }
+
+        public string Path
+        {
+            get { return model.Path; }
             set
             {
-                if (model.SourcePath != value)
+                if (model.Path != value)
                 {
-                    model.SourcePath = value;
-                    OnPropertyChanged(nameof(SourcePath));
-                    _mainService.UpdateFiles(value, SourceFiles);
+                    model.Path = value;
+                    OnPropertyChanged(nameof(Path));
+                    _mainService.UpdateFiles(value, Files);
                 }
             }
         }
-        public ObservableCollection<FilesModel> SourceFiles { get; } = new ObservableCollection<FilesModel>();
 
-        public string DestinationPath
-        {
-            get { return model.DestinationPath; }
-            set
-            {
-                if (model.DestinationPath != value)
-                {
-                    model.DestinationPath = value;
-                    OnPropertyChanged(nameof(DestinationPath));
-                    _mainService.UpdateFiles(value, DestinationFiles);
-                }
-            }
-        }
-        public ObservableCollection<FilesModel> DestinationFiles { get; } = new ObservableCollection<FilesModel>();
-        
+        public ObservableCollection<FilesModel> Files { get; } = new ObservableCollection<FilesModel>();
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)

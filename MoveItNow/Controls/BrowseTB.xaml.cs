@@ -8,16 +8,16 @@ namespace MoveItNow
     /// </summary>
     public partial class BrowseTB : System.Windows.Controls.UserControl
     {
-        public static readonly DependencyProperty FilePathProperty = DependencyProperty.Register(
-            "FilePath",
+        public static readonly DependencyProperty PathProperty = DependencyProperty.Register(
+            "Path",
             typeof(string),
             typeof(BrowseTB),
             new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
-        public string FilePath
+        public string Path
         {
-            get => (string)GetValue(FilePathProperty);
-            set => SetValue(FilePathProperty, value);
+            get => (string)GetValue(PathProperty);
+            set => SetValue(PathProperty, value);
         }
 
         public BrowseTB()
@@ -32,7 +32,7 @@ namespace MoveItNow
 
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
-                FilePath = dialog.FileName;
+                Path = dialog.FileName;
             }
         }
     }

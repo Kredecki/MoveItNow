@@ -11,33 +11,34 @@
 
     <Grid>
         <local:BrowseTB
-            FilePath="{Binding SourcePath, Mode=TwoWay}"
+            Path="{Binding SourceBrowse.Path, Mode=TwoWay}"
             Margin="10,10,0,0" 
             VerticalAlignment="Top" 
             HorizontalAlignment="Left"
             Height="20"  
             Width="380" />
         <local:FilesDG 
-            Files="{Binding SourceFiles}" 
+            Files="{Binding SourceBrowse.Files}" 
             Margin="10,40,0,0"
             VerticalAlignment="Top" 
             HorizontalAlignment="Left" 
-            Height="500" 
+            Height="480" 
             Width="380" />
+        <local:CountedFilesLBL />
 
         <local:BrowseTB 
-            FilePath="{Binding DestinationPath, Mode=TwoWay}"
+            Path="{Binding DestinationBrowse.Path, Mode=TwoWay}"
             Margin="390,10,0,0"
             VerticalAlignment="Top"
             HorizontalAlignment="Left" 
             Height="20"  
             Width="380" />
         <local:FilesDG 
-            Files="{Binding DestinationFiles}" 
+            Files="{Binding DestinationBrowse.Files}" 
             Margin="390,40,0,0" 
             VerticalAlignment="Top"
             HorizontalAlignment="Left" 
-            Height="500" 
+            Height="480" 
             Width="380" />
     </Grid>
 </Page>
